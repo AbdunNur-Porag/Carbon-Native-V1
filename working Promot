@@ -1,0 +1,14 @@
+Make a js framework which work with react with predefined ui component.
+Here use React Cdn.
+Like i declear
+p tag as Text,h1 text as Large
+and button as Button and div as Box.
+And use them in this way.
+function App(){
+return(
+<Text>Hello</Text>
+<Button>This Is Button</Button>
+
+)
+
+}
