@@ -21,7 +21,17 @@
  <script src="UIVE/router.js"></script>
  <script type="text/babel" src="UIVE/widgets.js"></script>
   <!-- Then load app.js with type="text/babel" -->
-  
-  <script type="text/babel" src="View/app.js"></script>
+  <style>
+  .fade-in {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .fade-in.show {
+    opacity: 1;
+  }
+</style>
+
+  <script type="text/babel" src="View/example.js"></script>
 </body>
 </html>

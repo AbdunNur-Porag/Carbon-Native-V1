@@ -1,5 +1,6 @@
 // router.js
-const router = (function() {
+
+const router = (function () {
   let routes = {};
   let defaultRoute = null;
   let notFoundPage = null;
@@ -12,20 +13,33 @@ const router = (function() {
     notFoundPage = routeMap.notfound || null;
 
     window.addEventListener('popstate', () => {
-      renderRoute(location.pathname.slice(1));
+      renderRoute(getRouteFromURL());
     });
 
-    renderRoute(location.pathname.slice(1)); // render correct page on page load
+    renderRoute(getRouteFromURL()); // render correct page on page load
+  }
+
+  function getRouteFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('route') || '';
+  }
+
+  function updateURL(route, replace = false) {
+    const newURL = `?route=${route}`;
+    if (replace) {
+      history.replaceState(null, '', newURL);
+    } else {
+      history.pushState(null, '', newURL);
+    }
+    renderRoute(route);
   }
 
   function routeTo(path) {
-    history.pushState(null, '', '/' + path);
-    renderRoute(path);
+    updateURL(path, false);
   }
 
   function replaceTo(path) {
-    history.replaceState(null, '', '/' + path);
-    renderRoute(path);
+    updateURL(path, true);
   }
 
   function renderRoute(path) {
@@ -41,3 +55,4 @@ const router = (function() {
 // Easy access
 const routeTo = router.routeTo;
 const replaceTo = router.replaceTo;
+
